@@ -1,0 +1,17 @@
+services:
+  db:
+    image: postgres:16
+    container_name: accounting-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: accounting
+      POSTGRES_PASSWORD: change_me
+      POSTGRES_DB: accounting
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/migrations:/docker-entrypoint-initdb.d:ro
+
+volumes:
+  pgdata:
